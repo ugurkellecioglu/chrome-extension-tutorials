@@ -44,15 +44,46 @@ chrome.storage.local.get("websites", function (result) {
   }
 })
 
+// Function to create the HTML for a website item with delete button
+function createWebsiteItem(website, index) {
+  return `
+      <div class="website-item d-flex justify-content-between align-items-center">
+        <span>${website}</span>
+        <button class="btn btn-danger delete-btn" data-index="${index}">Delete</button>
+      </div>
+    `
+}
+
 // Function to display the websites in the list
 function displayWebsites(websites) {
   listOfWebsites.innerHTML = ""
   for (var i = 0; i < websites.length; i++) {
     var website = websites[i]
     var websiteItem = document.createElement("div")
-    websiteItem.textContent = website
+    websiteItem.innerHTML = createWebsiteItem(website, i)
+
     listOfWebsites.appendChild(websiteItem)
   }
+
+  // Add event listeners to delete buttons
+  var deleteButtons = document.querySelectorAll(".delete-btn")
+  deleteButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      var index = parseInt(button.dataset.index)
+
+      // Retrieve the current list of websites from chrome.storage.local
+      chrome.storage.local.get("websites", function (result) {
+        var websites = result.websites || []
+        websites.splice(index, 1)
+
+        // Save the updated list of websites in chrome.storage.local
+        chrome.storage.local.set({ websites: websites }, function () {
+          // Display the updated list of websites
+          displayWebsites(websites)
+        })
+      })
+    })
+  })
 }
 
 // Event listener for the input field
