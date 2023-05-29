@@ -43,6 +43,19 @@ takeBreakBtn.style.border = "none"
 takeBreakBtn.style.borderRadius = "5px"
 takeBreakBtn.style.cursor = "pointer"
 
+// Add event listener to the "Take 5 min break" button
+takeBreakBtn.addEventListener("click", function () {
+  // Send message to the background script
+  chrome.runtime
+    .sendMessage({ message: "start_break" })
+    .then(function (response) {
+      console.log(response)
+      if (response.message === "show_page") {
+        backdrop.remove()
+      }
+    })
+})
+
 // Create the "OK" button
 var okBtn = document.createElement("button")
 okBtn.textContent = "OK"

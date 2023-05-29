@@ -123,3 +123,11 @@ function isValidURL(string) {
 
   return true
 }
+
+// takeBreakBtn
+
+takeBreakBtn.addEventListener("click", function () {
+  chrome.runtime.sendMessage({
+    message: "start_break",
+  })
+})
