@@ -41,6 +41,7 @@ takeBreakBtn.style.backgroundColor = "#007bff"
 takeBreakBtn.style.color = "#fff"
 takeBreakBtn.style.border = "none"
 takeBreakBtn.style.borderRadius = "5px"
+takeBreakBtn.style.cursor = "pointer"
 
 // Create the "OK" button
 var okBtn = document.createElement("button")
@@ -51,6 +52,11 @@ okBtn.style.backgroundColor = "#6c757d"
 okBtn.style.color = "#fff"
 okBtn.style.border = "none"
 okBtn.style.borderRadius = "5px"
+okBtn.style.cursor = "pointer"
+okBtn.addEventListener("click", function () {
+  // Send message to the background script
+  chrome.runtime.sendMessage({ message: "close_tab" })
+})
 
 // Append the elements to the box
 box.appendChild(title)

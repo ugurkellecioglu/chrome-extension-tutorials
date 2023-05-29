@@ -4,6 +4,9 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.message === "update_status" && request.data === true) {
     // Enable focus mode
     chrome.storage.local.set({ switchState: true })
+  } else if (request.message === "close_tab") {
+    // Close the tab
+    chrome.tabs.remove(sender.tab.id)
   }
 })
 
