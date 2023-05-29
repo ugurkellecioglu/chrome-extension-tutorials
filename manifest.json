@@ -1,7 +1,17 @@
 {
   "name": "Focus Mode",
+  "description": "Focus Mode is a Chrome extension that helps you stay focused on your work by blocking distracting websites.",
+  "author": {
+    "email": "ugur.kellecioglu.uk@gmail.com"
+  },
   "version": "0.0.1",
   "manifest_version": 3,
+  "icons": {
+    "16": "./assets/icons/16.png",
+    "32": "./assets/icons/32.png",
+    "48": "./assets/icons/48.png",
+    "128": "./assets/icons/128.png"
+  },
   "action": {
     "default_popup": "popup/popup.html"
   },
