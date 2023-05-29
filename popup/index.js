@@ -14,9 +14,11 @@ chrome.storage.local.get("switchState", function (result) {
 statusSwitch.addEventListener("change", function () {
   var switchState = statusSwitch.checked
   updateStatusText(switchState)
-
-  // Save the switch state in chrome.storage.local
-  chrome.storage.local.set({ switchState: switchState })
+  // Send message to background.js to update the switch state
+  chrome.runtime.sendMessage({
+    message: "update_status",
+    data: switchState,
+  })
 })
 
 // Function to update the status text based on the switch state

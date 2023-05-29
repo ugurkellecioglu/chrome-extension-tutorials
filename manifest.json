@@ -5,5 +5,9 @@
   "action": {
     "default_popup": "popup/popup.html"
   },
-  "permissions": ["storage"]
+  "permissions": ["storage", "tabs", "scripting"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "host_permissions": ["https://*/*", "http://*/*"]
 }
